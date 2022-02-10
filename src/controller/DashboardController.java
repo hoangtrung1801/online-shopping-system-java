@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.FontMetrics;
+import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
@@ -7,8 +9,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
+import javax.security.auth.callback.LanguageCallback;
 
 import constants.Category;
 import constants.Role;
@@ -33,6 +34,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -159,9 +163,10 @@ public class DashboardController implements Initializable {
 
   private AnchorPane createProductCard(Product product) {
     AnchorPane cProduct = new AnchorPane();
-    cProduct.setStyle("-fx-background-color: #bbb");
-    cProduct.setPrefHeight(350);
+    cProduct.setStyle("-fx-background-color: #ecf0f1; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 1)");
+    // cProduct.setStyle("-fx-background-radius: 12px");
     cProduct.setPrefWidth(250);
+    cProduct.setPrefHeight(375);
 
     // image
     Image image = new Image(new ByteArrayInputStream(product.getImage()));
@@ -174,23 +179,28 @@ public class DashboardController implements Initializable {
 
     // name
     Label lName = new Label(product.getName());
-    Font nameFont = Font.font("System", FontWeight.BOLD, 32.0);
-    lName.setPrefWidth(230);
+    Font nameFont = Font.font("System", FontWeight.NORMAL, 18.0);
+    // lName.setPrefWidth(240);
     lName.setFont(nameFont);
+    lName.setWrapText(true);
+    lName.setMaxWidth(240);
+    lName.setMaxHeight(60);
+    // lName.setTextFill(Paint.valueOf("#7f8c8d"));
 
-    AnchorPane.setTopAnchor(lName, 250.0);
+    AnchorPane.setTopAnchor(lName, 260.0);
     AnchorPane.setLeftAnchor(lName, 10.0);
 
     // price
     Label lPrice = new Label(product.getPrice() + "$");
-    Font priceFont = Font.font("System", FontWeight.NORMAL, 16.0);
+    Font priceFont = Font.font("System", FontWeight.BOLD, 16.0);
     lPrice.setFont(priceFont);
 
-    AnchorPane.setTopAnchor(lPrice, 290.0);
+    AnchorPane.setTopAnchor(lPrice, 315.0);
     AnchorPane.setLeftAnchor(lPrice, 10.0);
 
     // button add cart
     Button addCart = new Button("Add cart");
+    // addCart.setStyle("  -fx-cursor: \"open_hand\";\n  -fx-text-fill: #fff;\n  -fx-background-color:  #3498db;\n  -fx-background-radius: 4px;");
     addCart.setOnAction(new EventHandler<ActionEvent>() {
       @Override
       public void handle(ActionEvent arg0) {
@@ -199,7 +209,7 @@ public class DashboardController implements Initializable {
       }
     });
 
-    AnchorPane.setTopAnchor(addCart, 320.0);
+    AnchorPane.setTopAnchor(addCart, 340.0);
     AnchorPane.setLeftAnchor(addCart, 10.0);
 
     cProduct.setOnMouseClicked(new EventHandler<Event>() {

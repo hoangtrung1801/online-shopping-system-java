@@ -14,6 +14,7 @@ public class AddCategoryRoute {
     Parent root = fxmlLoader.load();
 
     Scene scene = new Scene(root);
+    scene.getStylesheets().add("css/common.css");
     Stage stage = new Stage();
     stage.setScene(scene);
     stage.initModality(Modality.APPLICATION_MODAL);

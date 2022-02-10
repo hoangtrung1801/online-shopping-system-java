@@ -1,10 +1,6 @@
-import java.sql.Date;
-
 import database.DatabaseConn;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import route.AddProductRoute;
-import route.DashboardRoute;
 import route.LoginRoute;
 
 public class App extends Application{

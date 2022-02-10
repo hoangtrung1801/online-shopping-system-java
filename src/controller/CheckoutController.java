@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -98,6 +99,8 @@ public class CheckoutController implements Initializable {
 
   private AnchorPane createProductCard(Product product, int amount) {
     AnchorPane cProduct = new AnchorPane();
+    cProduct.setStyle("-fx-background-color: #ecf0f1; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 1)");
+    cProduct.setPadding(new Insets(0, 0, 10, 0));
 
     // image
     Image image = new Image(new ByteArrayInputStream(product.getImage()));
@@ -108,18 +111,21 @@ public class CheckoutController implements Initializable {
     AnchorPane.setTopAnchor(imageView, 0.0);
 
     // name
-    Text tName = new Text(product.getName());
-    Font fontName = Font.font("System", FontWeight.NORMAL, 24.0);
+    Label tName = new Label(product.getName());
+    Font fontName = Font.font("System", FontWeight.NORMAL, 18.0);
     tName.setFont(fontName);
-    AnchorPane.setTopAnchor(tName, 20.0);
-    AnchorPane.setLeftAnchor(tName, 140.0);
+    tName.setMaxWidth(240.0);
+    tName.setMaxHeight(60.0);
+    tName.setWrapText(true);
+    AnchorPane.setTopAnchor(tName, 10.0);
+    AnchorPane.setLeftAnchor(tName, 120.0);
 
     // price
     Text tPrice = new Text(product.getPrice() + " $");
-    Font fontPrice = Font.font("System", FontWeight.NORMAL, 18.0);
+    Font fontPrice = Font.font("System", FontWeight.BOLD, 16.0);
     tPrice.setFont(fontPrice);
-    AnchorPane.setTopAnchor(tPrice, 60.0);
-    AnchorPane.setLeftAnchor(tPrice, 140.0);
+    AnchorPane.setTopAnchor(tPrice, 70.0);
+    AnchorPane.setLeftAnchor(tPrice, 120.0);
 
     // amount
     HBox cAmount = new HBox();
@@ -129,7 +135,7 @@ public class CheckoutController implements Initializable {
     bDesc.setPrefHeight(30.0);
 
     Button bInc = new Button("+");
-    bInc.setPrefHeight(30.0);
+    bInc.setPrefWidth(30.0);
     bInc.setPrefHeight(30.0);
     bDesc.setOnAction(new EventHandler<ActionEvent>() {
       @Override

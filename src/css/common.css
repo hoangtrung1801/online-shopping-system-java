@@ -1,0 +1,30 @@
+* {
+  /* -fx-font-family: "Lato"; */
+}
+
+.button{
+  -fx-cursor: "open_hand";
+  -fx-text-fill: #fff;
+  -fx-background-color:  #3498db;
+  -fx-background-radius: 6px;
+}
+
+.button:pressed {
+  -fx-effect: dropshadow(three-pass-box, #3498db80, 10, 0, 0, 5);
+}
+
+.button:hover {
+  -fx-background-color: #2980b9;
+}
+
+.choose-file, .choose-category {
+  -fx-background-color: #fff;
+  -fx-text-fill: #000;
+  -fx-border-color:  #bdc3c7;
+  -fx-border-radius: 8px;
+}
+
+.choose-file:hover, .choose-category:hover {
+  -fx-background-color: #eeeeee;
+  -fx-background-radius: 8px;
+}

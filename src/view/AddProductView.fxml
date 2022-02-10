@@ -7,7 +7,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AddProductController">
    <children>
       <Text layoutX="193.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Product">
          <font>
@@ -23,9 +23,9 @@
       <Text layoutX="157.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Available Item Count" />
       <TextField fx:id="txAvailableItemCount" layoutX="293.0" layoutY="216.0" />
       <Text layoutX="157.0" layoutY="287.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Category" />
-      <ComboBox fx:id="txCategory" layoutX="293.0" layoutY="270.0" prefWidth="150.0" promptText="Choose category" />
+      <ComboBox fx:id="txCategory" layoutX="293.0" layoutY="270.0" prefWidth="150.0" promptText="Choose category" styleClass="choose-category" />
       <Text layoutX="160.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Image" />
-      <Button fx:id="btnChooseImage" layoutX="293.0" layoutY="319.0" mnemonicParsing="false" onAction="#chooseImage" text="Choose file" />
+      <Button fx:id="btnChooseImage" layoutX="293.0" layoutY="319.0" mnemonicParsing="false" onAction="#chooseImage" styleClass="choose-file" text="Choose file" />
       <Button fx:id="btnAdd" layoutX="280.0" layoutY="360.0" mnemonicParsing="false" onAction="#addProduct" text="Add" />
    </children>
 </AnchorPane>

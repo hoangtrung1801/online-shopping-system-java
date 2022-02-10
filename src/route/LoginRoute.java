@@ -11,9 +11,11 @@ public class LoginRoute {
   public LoginRoute() throws IOException {
     Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
     Scene scene = new Scene(root);
+    scene.getStylesheets().add("css/common.css");
 
     Stage stage = new Stage();
     stage.setScene(scene);
+    stage.setResizable(false);
     stage.show();
   }
 }

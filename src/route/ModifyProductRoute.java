@@ -19,6 +19,8 @@ public class ModifyProductRoute {
     modifyProductController.setProduct(product);
 
     Scene scene = new Scene(root);
+    scene.getStylesheets().add("css/common.css");
+
     Stage stage = new Stage();
     stage.setScene(scene);
     stage.initModality(Modality.APPLICATION_MODAL);

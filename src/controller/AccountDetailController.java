@@ -5,11 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.xml.transform.Templates;
-
 import database.Store;
 import javafx.application.Platform;
-import javafx.beans.Observable;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableStringValue;
 import javafx.beans.value.ObservableValue;
@@ -27,7 +24,6 @@ import javafx.scene.text.Text;
 import javafx.util.Callback;
 import model.Account;
 import model.Order;
-import model.Payment;
 import route.AccountOrderDetailRoute;
 
 public class AccountDetailController implements Initializable{

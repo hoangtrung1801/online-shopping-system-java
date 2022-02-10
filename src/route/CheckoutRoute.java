@@ -14,7 +14,10 @@ public class CheckoutRoute {
     Parent root = (Parent)fxmlLoader.load();
 
     Scene scene = new Scene(root);
+    scene.getStylesheets().add("css/Checkout.css");
+
     Stage stage = new Stage();
+    stage.setResizable(false);
     stage.initModality(Modality.APPLICATION_MODAL);
     stage.setScene(scene);
     stage.show();

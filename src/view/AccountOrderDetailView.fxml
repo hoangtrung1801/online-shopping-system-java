@@ -8,23 +8,23 @@
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AccountOrderDetailController">
    <children>
-      <AnchorPane prefHeight="60.0" prefWidth="400.0">
+      <AnchorPane prefHeight="60.0" prefWidth="400.0" style="-fx-background-color: #fff;">
          <children>
-            <Text layoutX="21.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order">
+            <Text layoutX="10.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Order">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Text>
-            <Text fx:id="tOrderId" layoutX="97.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <Text fx:id="tOrderId" layoutX="83.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="System Bold Italic" size="24.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <ScrollPane>
+      <ScrollPane hbarPolicy="NEVER" style="-fx-background-color: transparent;">
          <content>
-            <VBox fx:id="cYourOrder" prefHeight="440.0" prefWidth="400.0" />
+            <VBox fx:id="cYourOrder" prefHeight="440.0" prefWidth="400.0" spacing="10.0" style="-fx-background-color: #fff;" />
          </content>
       </ScrollPane>
    </children>

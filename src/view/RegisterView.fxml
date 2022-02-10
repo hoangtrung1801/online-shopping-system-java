@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="463.0" prefWidth="506.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.RegisterController">
    <children>
       <Label layoutX="105.0" layoutY="111.0" text="Username">
          <font>
@@ -20,7 +20,7 @@
          </font>
       </Label>
       <TextField fx:id="txUsername" layoutX="271.0" layoutY="112.0" />
-      <Label layoutX="160.0" layoutY="41.0" text="Register">
+      <Label layoutX="160.0" layoutY="30.0" text="Register">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
@@ -56,6 +56,9 @@
       <TextField fx:id="txAddress" layoutX="271.0" layoutY="272.0" />
       <TextField fx:id="txEmail" layoutX="271.0" layoutY="317.0" />
       <TextField fx:id="txPhone" layoutX="271.0" layoutY="361.0" />
-      <Button fx:id="btnRegister" layoutX="223.0" layoutY="413.0" mnemonicParsing="false" text="Register" />
+      <Button fx:id="btnRegister" layoutX="213.0" layoutY="408.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="80.0" text="Register">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
    </children>
 </AnchorPane>

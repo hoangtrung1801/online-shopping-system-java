@@ -23,7 +23,7 @@
             </TableView>
          </content>
       </ScrollPane>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #fff;">
          <children>
             <Button fx:id="btnBlock" layoutX="40.0" layoutY="152.0" mnemonicParsing="false" text="Block" />
             <Button fx:id="btnUnblock" layoutX="32.0" layoutY="187.0" mnemonicParsing="false" text="Unblock" />
