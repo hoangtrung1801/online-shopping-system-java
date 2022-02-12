@@ -8,9 +8,9 @@ This is my project for my final test in university (subject: OOP).
 
 ## Getting Started
 
-Step 1 : Add libary Javafx and JDBC into folder lib
-Step 2 : Turn on database and run all files *.sql in folder src/database
-Step 3 : Run file App.java
+Step 1 : Add libary Javafx and JDBC into folder lib  
+Step 2 : Turn on database and run all files *.sql in folder src/database  
+Step 3 : Run file App.java  
 
 ## Folder Structure
 
