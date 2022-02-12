@@ -4,12 +4,15 @@ import java.awt.FontMetrics;
 import java.awt.Toolkit;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.lang.annotation.Target;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import javax.security.auth.callback.LanguageCallback;
+import javax.xml.catalog.CatalogResolver;
 
 import constants.Category;
 import constants.Role;
@@ -42,6 +45,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import model.Account;
+import model.Catalog;
 import model.Product;
 import model.ShoppingCart;
 import route.AccountDetailRoute;
@@ -55,6 +59,7 @@ public class DashboardController implements Initializable {
 
   private ShoppingCart shoppingCart = null;
   private Account account;
+  private Catalog catalog;
 
   @FXML
   private Button btnAddProduct;
@@ -97,6 +102,7 @@ public class DashboardController implements Initializable {
 
     shoppingCart = (ShoppingCart) Store.get("shoppingCart");
     account = (Account) Store.get("account");
+    catalog = (Catalog) Store.get("catalog");
 
     // create new shopping cart if have no
     if (shoppingCart == null) {
@@ -104,11 +110,17 @@ public class DashboardController implements Initializable {
       Store.set("shoppingCart", shoppingCart);
     }
 
+    if (catalog == null) {
+      catalog = new Catalog();
+      Store.set("catalog", catalog);
+    }
+
     // set visible = false if being customer
     if(account.getRole().equals(Role.Customer)) {
       cAdminFunction.setVisible(false);
     }
 
+    // Show functions in dashboard
     showProduct();
     showAmountCart();
     showUsername();
@@ -223,7 +235,10 @@ public class DashboardController implements Initializable {
       }
     });
 
-    cProduct.getChildren().addAll(imageView, lPrice, addCart, lName);
+    cProduct.getChildren().addAll(imageView, lPrice, lName);
+    if(account.getRole().equals(Role.Customer)) {
+      cProduct.getChildren().add(addCart);
+    }
     return cProduct;
   }
 
@@ -248,34 +263,6 @@ public class DashboardController implements Initializable {
         e.printStackTrace();
       }
     }
-  }
-
-  class actionFindKeyPress implements EventHandler<KeyEvent> {
-    @Override
-    public void handle(KeyEvent e) {
-      if(e.getCode() != KeyCode.ENTER) {
-        return;
-      }
-      String target = txFind.getText();
-      try {
-        List<Product> products = Product.getProducts();
-        List<Product> productsFiltered = products.stream().filter(product -> {
-          if(product.getName().toLowerCase().indexOf(target.toLowerCase(), 0) != -1) {
-            return true;
-          }
-          return false;
-        }).collect(Collectors.toList());
-
-        cProducts.getChildren().clear();
-        for(Product product : productsFiltered) {
-          cProducts.getChildren().add(createProductCard(product));
-        }
-
-      } catch (IOException e1) {
-        e1.printStackTrace();
-      }
-    }
-
   }
 
   class actionAddCategory implements EventHandler<MouseEvent> {
@@ -304,25 +291,28 @@ public class DashboardController implements Initializable {
     @Override
     public void changed(ObservableValue<? extends String> arg0, String arg1, String arg2) {
       String target = txCategory.getSelectionModel().getSelectedItem();
-      try {
-        List<Product> products = Product.getProducts();
-        List<Product> productsFiltered = products.stream().filter(product -> {
-          if(target.equals("All")) {
-            return true;
-          }
-          if(product.getCategory().equals(target)) {
-            return true;
-          }
-          return false;
-        }).collect(Collectors.toList());
 
-        cProducts.getChildren().clear();
-        for(Product product : productsFiltered) {
-          cProducts.getChildren().add(createProductCard(product));
-        }
+      List<Product> productsFiltered = catalog.searchProductsByCategory(target);
 
-      } catch (IOException e1) {
-        e1.printStackTrace();
+      cProducts.getChildren().clear();
+      for (Product product : productsFiltered) {
+        cProducts.getChildren().add(createProductCard(product));
+      }
+    }
+  }
+
+  class actionFindKeyPress implements EventHandler<KeyEvent> {
+    @Override
+    public void handle(KeyEvent e) {
+      if(e.getCode() != KeyCode.ENTER) {
+        return;
+      }
+
+      List<Product> productsFiltered = catalog.searchProductsByName(txFind.getText()); 
+
+      cProducts.getChildren().clear();
+      for (Product product : productsFiltered) {
+        cProducts.getChildren().add(createProductCard(product));
       }
     }
   }

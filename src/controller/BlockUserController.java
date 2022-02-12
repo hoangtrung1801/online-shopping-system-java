@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import constants.AccountStatus;
+import database.Store;
 import javafx.collections.FXCollections;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -14,11 +15,13 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import model.Admin;
 import model.Customer;
 
 public class BlockUserController implements Initializable {
 
-  Customer accountSelected;
+  private Customer accountSelected;
+  private Admin adminAccount;
 
   @FXML
   private TableView<Customer> cAccount;
@@ -49,6 +52,9 @@ public class BlockUserController implements Initializable {
 
   @Override
   public void initialize(URL arg0, ResourceBundle arg1) {
+
+    adminAccount = (Admin) Store.get("account");
+
     List<Customer> customer = Customer.getCustomers();
     usernameCol.setCellValueFactory(new PropertyValueFactory<>("username"));
     shippingAddressCol.setCellValueFactory(new PropertyValueFactory<>("shippingAddress"));
@@ -79,7 +85,7 @@ public class BlockUserController implements Initializable {
   class actionBlock implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent arg0) {
-      accountSelected.setStatus(AccountStatus.Blocked);
+      adminAccount.blockUser(accountSelected);
       reloadTable();
     }
   }
@@ -87,7 +93,7 @@ public class BlockUserController implements Initializable {
   class actionUnblock implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent arg0) {
-      accountSelected.setStatus(AccountStatus.Active);
+      adminAccount.unblockUser(accountSelected);
       reloadTable();
     }
   }

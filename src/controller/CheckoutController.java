@@ -35,6 +35,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import model.Account;
+import model.Customer;
 import model.Order;
 import model.OrderItem;
 import model.Payment;
@@ -47,7 +48,7 @@ public class CheckoutController implements Initializable {
   private ShoppingCart shoppingCart;
   private Account account;
 
-  double amount;
+  private double amount;
 
   @FXML
   private VBox cProducts;
@@ -73,7 +74,6 @@ public class CheckoutController implements Initializable {
     updateCheckout();;
 
     btnCheckout.setOnMouseClicked(new actionCheckout());
-
 
     Platform.runLater(() -> {
       // close window
@@ -182,44 +182,26 @@ public class CheckoutController implements Initializable {
 
   public void updateCheckout() {
     double price = shoppingCart.getPrice();
-    double shipmentFee = 5;
-    double total = price + shipmentFee;
+    double shipmentFee = shoppingCart.getShipmentFee();
+    double total = shoppingCart.getTotal();
 
-    tPrice.setText(price + " $");
-    tShipmentFee.setText(shipmentFee + " $");
-    tTotal.setText(total + " $");
+    tPrice.setText(String.format("%.2f", price) + " $");
+    tShipmentFee.setText(String.format("%.2f", shipmentFee) + " $");
+    tTotal.setText(String.format("%.2f", total) + " $");
   }
 
   class actionCheckout implements EventHandler<MouseEvent> {
     @Override
     public void handle(MouseEvent arg0) {
-      Order order = new Order();
-      Payment payment = new Payment();
+      if(shoppingCart.getAmountItems() == 0) {
+        Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle("Notification");
+        alert.setHeaderText("You have not any products in your cart. Please fill it");
+        alert.showAndWait();
+        return;
+      }
 
-      payment.setId(DatabaseConn.getIdNextInTable("payment") + "");
-      // payment.setOrder(order);
-      payment.setStatus(PaymentStatus.Completed);
-
-      // caculate amount all products and save order item
-      shoppingCart.getItems().forEach((product, quantity) -> {
-        amount += product.getPrice() * quantity;
-      });
-      // add shipping fee
-      amount += 5;
-      payment.setAmount(amount);
-      payment.save();
-
-      order.setId(DatabaseConn.getIdNextInTable("orders") + "");
-      order.setAccount(account);
-      order.setOrderDate(new Date(System.currentTimeMillis()));
-      order.setPayment(payment);
-      order.setStatus(OrderStatus.Pending);
-      order.save();
-
-      shoppingCart.getItems().forEach((product, quantity) -> {
-        OrderItem.save(product, order, product.getPrice(), quantity);
-      });
-
+      ((Customer)account).placeOrder(shoppingCart);
 
       Alert alert = new Alert(AlertType.INFORMATION);
       alert.setTitle("Notification");

@@ -106,6 +106,18 @@ public class Account {
     this.role = role;
   }
 
+  public Account(String username, String password, AccountStatus status, String name, String shippingAddress, String email, String phone, Role role, String id) {
+    this.username = username;
+    this.password = password;
+    this.status = status;
+    this.name = name;
+    this.shippingAddress = shippingAddress;
+    this.email = email;
+    this.phone = phone;
+    this.role = role;
+    this.id = id;
+  }
+
   public Account() {}
 
   public void save() {

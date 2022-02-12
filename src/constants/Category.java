@@ -1,6 +1,5 @@
 package constants;
 
-import java.lang.Thread.State;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

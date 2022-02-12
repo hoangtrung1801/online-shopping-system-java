@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ShoppingCart {
+  private final double shipmentFee = 5;
+
   private Map<Product, Integer> items;
   private int amountItems;
 
@@ -50,11 +52,25 @@ public class ShoppingCart {
   }
 
   public double getPrice() {
-    var wrapper = new Object() { int price = 0; };
+    var wrapper = new Object() { double price = 0; };
     items.forEach((product, amount) -> {
       wrapper.price += amount * product.getPrice();
     });
 
     return wrapper.price;
+  }
+
+  public double getShipmentFee(){
+    double price = getPrice();
+    if(price > 0) return shipmentFee;
+    return 0;
+  }
+
+  public double getTotal() {
+    double price = getPrice();
+    double shipmentFee = getShipmentFee();
+    double total = price + shipmentFee;
+
+    return total;
   }
 }

@@ -17,9 +17,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import model.Admin;
 import model.Product;
 
 public class AddProductController implements Initializable{
+
+    private Admin adminAccount;
 
     @FXML
     private Button btnAdd;
@@ -49,29 +52,26 @@ public class AddProductController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        adminAccount = (Admin) Store.get("account");
+
         List<String> categories = Category.getCategories();
         for(String category : categories) {
             txCategory.getItems().add(category);
         }
     }
 
-    public void addProduct() {
-        name = txName.getText();
-        description = txDescription.getText();
-        price = Double.valueOf(txPrice.getText());
-        availableItemCount = Integer.valueOf(txAvailableItemCount.getText());
-        category = txCategory.getValue();
-
-        Product.save(name, description, price, availableItemCount, category, image);
-        ((Stage) btnAdd.getScene().getWindow()).close();
-        ((DashboardController) Store.get("dashboardController")).showProduct();
-    }
-    
     public void chooseImage() throws FileNotFoundException {
         FileChooser fileChooser = new FileChooser();
         File file = fileChooser.showOpenDialog(new Stage());
         btnChooseImage.setText("File: " + file.getPath());
         image = new FileInputStream(file);
+    }
+
+    public void addProduct() {
+        adminAccount.addProduct(txName.getText(), txDescription.getText(), Double.valueOf(txPrice.getText()), Integer.valueOf(txAvailableItemCount.getText()), txCategory.getValue(), image);
+
+        ((Stage) btnAdd.getScene().getWindow()).close();
+        ((DashboardController) Store.get("dashboardController")).showProduct();
     }
 
 }

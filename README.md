@@ -1,10 +1,16 @@
-## Getting Started
+## Introduction
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This is my project for my final test in university (subject: OOP). 
 
 ## Requirement
 - Javafx v17.0.1
 - JDBC
+
+## Getting Started
+
+Step 1 : Add libary Javafx and JDBC into folder lib
+Step 2 : Turn on database and run all files *.sql in folder src/database
+Step 3 : Run file App.java
 
 ## Folder Structure
 

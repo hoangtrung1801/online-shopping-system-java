@@ -37,12 +37,13 @@
             <PasswordField fx:id="txPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <Button fx:id="btnLogin" layoutX="218.0" layoutY="227.0" mnemonicParsing="false" text="Login" />
+      <Button fx:id="btnLogin" layoutX="218.0" layoutY="234.0" mnemonicParsing="false" text="Login" />
+      <Label fx:id="lWarning" alignment="CENTER" contentDisplay="CENTER" layoutX="142.0" layoutY="212.0" prefHeight="18.0" prefWidth="198.0" textAlignment="CENTER" textFill="RED" />
       <Label layoutX="178.0" layoutY="49.0" text="Login">
          <font>
             <Font name="System Bold" size="48.0" />
          </font>
       </Label>
-      <Hyperlink fx:id="btnRegister" layoutX="189.0" layoutY="262.0" text="Create an account" />
+      <Hyperlink fx:id="btnRegister" layoutX="189.0" layoutY="269.0" text="Create an account" />
    </children>
 </AnchorPane>

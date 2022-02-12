@@ -9,7 +9,6 @@ import database.DatabaseConn;
 
 public class Payment {
   private String id;
-  // private Order order;
   private double amount;
   private PaymentStatus status;
 
